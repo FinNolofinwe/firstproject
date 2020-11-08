@@ -3,8 +3,17 @@
 1) Создать переменную numberOfFilms и в неё поместить ответ от пользователя на вопрос:
 'Сколько фильмов вы уже посмотрели?' */
 
-const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+let numberOfFilms;
 
+function start () {
+ numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '')
+ 
+ while (numberOfFilms == '' || numberOfFilms == null ||  isNaN(numberOfFilms)) {
+  numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+ }
+}
+
+start();
 /*
 2) Создать объект personalMovieDB и в него поместить такие свойства:
     - count - сюда передается ответ на первый вопрос
@@ -40,8 +49,8 @@ const personalMovieDB = {
 personalMovieDB.movies[a] = b;
 personalMovieDB.movies[c] = d;
 */
-
-/*for ( let i = 0; i < 2; i++) {
+function rememberMyFilms() {
+  for ( let i = 0; i < 2; i++) {
   const a = prompt('Один из последних просмотренных фильмов?', ''),
         b = prompt('На сколько оцените его?', '');
 
@@ -52,9 +61,13 @@ personalMovieDB.movies[c] = d;
           console.log('error');
           i--;
         }       
+ }
 }
-*/
-if (personalMovieDB.count < 10 ) {
+rememberMyFilms();
+
+function detectPersonalLevel() {
+
+  if (personalMovieDB.count < 10 ) {
   alert('Просмотрено довольно мало фильмов');
 } else if ( personalMovieDB.count >= 10 && personalMovieDB.count <= 30) {
   alert('Вы классический зритель');
@@ -62,5 +75,25 @@ if (personalMovieDB.count < 10 ) {
   alert('Вы киноман');
 } else { alert('Произошла ошибка')}
 
+}
+
+detectPersonalLevel();
+
+function showMyDB () {
+  if ( personalMovieDB.privat == false ) {
+    console.log(personalMovieDB);
+  }
+}
+
+showMyDB();
+
+function writeYourGenres () {
+  for (let i = 1; i <= 3; i++) {
+    const a = prompt(`Ваш любимый жанр под номером ${i}`, '');
+    personalMovieDB.genres.push(a);
+  }
+}
+
+writeYourGenres ();
 
 'use strict';
